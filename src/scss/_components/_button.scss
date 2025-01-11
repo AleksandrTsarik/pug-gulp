@@ -1,0 +1,41 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: solid 1px transparent;
+  border-radius: $radius;
+  outline: none;
+  padding: 10px 10px;
+  font-size: 14px;
+  font-weight: 400;
+  transition: 0.3s;
+  &:focus {
+    box-shadow: 0 0 0 4px rgba($primary, 0.5);
+  }
+  &:hover {
+    @media (min-width: $tablet) {
+      box-shadow: 0 0 0 2px rgba($primary, 0.5);
+    }
+  }
+  &--light {
+    background-color: $light;
+    color: $primary;
+    &:focus {
+      box-shadow: 0 0 0 4px rgba($light, 0.5);
+    }
+    &:hover {
+      @media (min-width: $tablet) {
+        box-shadow: 0 0 0 2px rgba($light, 0.5);
+      }
+    }
+  }
+  &--dark {
+    background-color: $primary;
+    color: $light;
+  }
+  &--gradient {
+    color: $primary;
+    //background-color: $light;
+    border-image: linear-gradient(to bottom, $primary 0%, $secondary 100%) 1;
+  }
+}

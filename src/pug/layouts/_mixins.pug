@@ -5,7 +5,6 @@ mixin breadcrumbs(param)
 				each item,index in param.path
 					if item.href && item.href!=''
 						//-a.breadcrumbs__item(href=""+item.href)!= item.title
-
 						span.breadcrumbs__item(itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem")
 							a(href=""+item.href itemprop="item")
 								span(itemprop="name")!= item.title
@@ -13,10 +12,17 @@ mixin breadcrumbs(param)
 
 					else
 						//-span.breadcrumbs__item!= item.title
-
 						span.breadcrumbs__item(itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem")
 							span(itemprop="name")!= item.title
 							meta(itemprop="position" content=""+index)
+
+//----button							
+mixin button(param)
+	button(class='btn btn--' + param.class)=param.text
+		if param.svg
+			+svg({type: param.svg})
+
+
 
 //----список svg
 mixin svg(param)
@@ -37,38 +43,42 @@ mixin svg(param)
 		<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path d="M13.5607 11.4393C12.9749 10.8536 12.0251 10.8536 11.4393 11.4393C10.8536 12.0251 10.8536 12.9749 11.4393 13.5607L13.5607 11.4393ZM16.4393 18.5607C17.0251 19.1464 17.9749 19.1464 18.5607 18.5607C19.1464 17.9749 19.1464 17.0251 18.5607 16.4393L16.4393 18.5607ZM8.33333 12.6667C5.9401 12.6667 4 10.7266 4 8.33333H1C1 12.3834 4.28325 15.6667 8.33333 15.6667V12.6667ZM4 8.33333C4 5.9401 5.9401 4 8.33333 4V1C4.28325 1 1 4.28325 1 8.33333H4ZM8.33333 4C10.7266 4 12.6667 5.9401 12.6667 8.33333H15.6667C15.6667 4.28325 12.3834 1 8.33333 1V4ZM12.6667 8.33333C12.6667 10.7266 10.7266 12.6667 8.33333 12.6667V15.6667C12.3834 15.6667 15.6667 12.3834 15.6667 8.33333H12.6667ZM11.4393 13.5607L16.4393 18.5607L18.5607 16.4393L13.5607 11.4393L11.4393 13.5607Z" fill="white"/>
 		</svg>
+	else if param.type == 'arrow'
+		<svg width="20" height="12" viewBox="0 0 20 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path d="M1 6H19M19 6L14 1M19 6L14 11" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+		</svg>
 
 
 //----inputs
 mixin formField(param)
 	if param.type == 'input'
-		.form-field(class="b-form-field--" + param.mode)
+		.form-field(class="form-field--" + param.mode)
 			.form-field__wrapper(class="" + (param.locked?'is-locked':''))
 				input.form-field__input(type="text" placeholder="" + param.placeholder value="" + (param.value?param.value:''))
 			if param.error
 				.form-field__error!= param.error
 	else if param.type == 'password'
-		.form-field(class="b-form-field--" + param.mode)
+		.form-field(class="form-field--" + param.mode)
 			.form-field__wrapper
 				input.form-field__input(type="password" placeholder="" + param.placeholder value="")
 	else if param.type == 'datepicker'
-		.form-field(class="b-form-field--" + param.type)
+		.form-field(class="form-field--" + param.type)
 			.form-field__wrapper
 				input.form-field__input(type="text" class="js-datepicker" placeholder="" + param.placeholder value="" data-icon="/f/img/icon-date.svg")
 	else if param.type == 'datepicker-order'
-		.form-field(class="b-form-field--" + param.type)
+		.form-field(class="form-field--" + param.type)
 			.form-field__wrapper
 				input.form-field__input(type="text" class="js-datepicker-order" placeholder="" + param.placeholder value="" data-icon="/f/img/icon-date.svg")
 	else if param.type == 'checkbox'
 		- var attr = {};
 		if param.checked
 			- attr.checked = 'checked';
-		.form-field(class="b-form-field--" + param.mode)
+		.form-field(class="form-field--" + param.mode)
 			label.form-field__label
 				input(type="checkbox")&attributes(attr)
 				.form-field__caption!= param.label
 	else if param.type == 'radio'
-		.form-field(class="b-form-field--" + param.mode)
+		.form-field(class="form-field--" + param.mode)
 			each item,index in param.options
 				- var attr = {}, i = 0;
 				- i = index + 1;
@@ -247,9 +257,10 @@ mixin formField(param)
 						{value:1920, option:'1920'},
 					], default:{value:0, option:'Год'}})
 	else if param.type == 'textarea'
-		.form-field(class="b-form-field--" + param.mode)
+		.form-field(class="form-field--" + param.mode)
 			.form-field__wrapper
 				textarea.form-field__textarea(placeholder="" + param.placeholder)
-
 	else
 		| unknown type - #{param.type}
+
+
