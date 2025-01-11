@@ -83,6 +83,13 @@ gulp.task('copy:css', function(callback) {
 	callback();
 });
 
+// Копирование Шрифтов.
+gulp.task('copy:fonts', function(callback) {
+	return gulp.src('./src/fonts/**/*.*')
+		.pipe(gulp.dest('./build/fonts/'));
+	callback();
+});
+
 // Копирование Значков сайта (favicons).
 gulp.task('copy:favicon', function(callback) {
 	return gulp.src('./src/*.ico')
@@ -116,6 +123,7 @@ gulp.task('watch', function() {
 	watch('./src/img/**/*.*', gulp.parallel('copy:img'));
 	watch('./src/js/**/*.*', gulp.parallel('copy:js'));
 	watch('./src/css/**/*.*', gulp.parallel('copy:css'));
+	watch('./src/fonts/**/*.*', gulp.parallel('copy:fonts'));
 	watch('./src/*.ico', gulp.parallel('copy:favicon'));
 });
 
@@ -138,7 +146,7 @@ gulp.task(
 	'default', 
 	gulp.series( 
 		gulp.parallel('clean:build'),
-		gulp.parallel('scss', 'pug', 'copy:img', 'copy:js', 'copy:css', 'copy:favicon'), 
+		gulp.parallel('scss', 'pug', 'copy:img', 'copy:js', 'copy:css', 'copy:fonts', 'copy:favicon'), 
 		gulp.parallel('server', 'watch') 
 		) 
 	);
