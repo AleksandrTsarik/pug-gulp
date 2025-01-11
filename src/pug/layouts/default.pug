@@ -1,0 +1,21 @@
+include ./../layouts/_mixins.pug
+
+block variables
+
+<!DOCTYPE html>
+html(lang="en")
+    block head
+        include head
+    body
+        .body-container
+            block header
+                include header
+            main 
+                block content
+                
+            block footer
+                include footer
+                include scripts
+
+
+            

@@ -1,0 +1,198 @@
+html,
+body,
+div,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+form,
+dfn,
+del,
+p,
+blockquote,
+fieldset,
+input,
+textarea,
+select,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+button,
+canvas,
+video {
+  margin: 0;
+  padding: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+address,
+caption,
+cite,
+code,
+th,
+dfn,
+del {
+  font-weight: normal;
+  font-style: normal;
+}
+ul,
+ol {
+  list-style: none;
+}
+fieldset,
+img {
+  border: none;
+}
+caption,
+th {
+  text-align: left;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button {
+  cursor: pointer;
+  line-height: normal;
+}
+button,
+input {
+  line-height: normal;
+}
+input[type="hidden"],
+[hidden],
+.hidden {
+  display: none;
+}
+textarea {
+  overflow: auto;
+  resize: none;
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+nav,
+section {
+  display: block;
+}
+audio,
+canvas,
+video {
+  display: inline-block;
+}
+a > img {
+  vertical-align: bottom;
+}
+strong,
+b {
+  font-weight: bold;
+}
+em,
+i {
+  font-style: italic;
+}
+del {
+  text-decoration: line-through;
+}
+:focus {
+  outline: none;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: top;
+  user-select: none;
+}
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+:is(.main, header, footer) {
+  & *:focus-visible {
+    outline: none;
+  }
+  a {
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+}
+:is(section, header, footer) {
+  :is(ul, ol) {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+section :is(select, input, textarea),
+:is(section, header, footer) button {
+  font-family: inherit;
+  font-weight: inherit;
+  cursor: pointer;
+  appearance: none;
+  border-radius: 0;
+  color: inherit;
+  &:focus-visible {
+    outline: none;
+  }
+}
+.main input {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+:is(section, header, footer) {
+  button {
+    background: none;
+    outline: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+html {
+  scroll-behavior: smooth;
+}
