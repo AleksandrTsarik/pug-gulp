@@ -250,14 +250,14 @@ let fieldSuggest = {
         oldsum += oldprice;
         price = new Intl.NumberFormat('ru-RU').format(price.toFixed(2));
         oldprice = new Intl.NumberFormat('ru-RU').format(oldprice.toFixed(2));
-        $(this).closest(t.basket).find(t.baskerPrice).html('<span class="b-price_rub">o</span> ' + price);
-        $(this).closest(t.basket).find(t.baskerOldPrice).html('<span class="b-price_rub">o</span> ' + oldprice);
+        $(this).closest(t.basket).find(t.baskerPrice).html('<span class="price_rub">o</span> ' + price);
+        $(this).closest(t.basket).find(t.baskerOldPrice).html('<span class="price_rub">o</span> ' + oldprice);
       });
       disc = Math.abs(oldsum - sum);
       sum = new Intl.NumberFormat('ru-RU').format(sum.toFixed(2));
       disc = new Intl.NumberFormat('ru-RU').format(disc.toFixed(2));
-      $(t.basketDiscount).html(disc + ' <span class="b-price_rub">o</span>');
-      $(t.basketSum).html(sum + ' <span class="b-price_rub">o</span>');
+      $(t.basketDiscount).html(disc + ' <span class="price_rub">o</span>');
+      $(t.basketSum).html(sum + ' <span class="price_rub">o</span>');
     }
   };
 
