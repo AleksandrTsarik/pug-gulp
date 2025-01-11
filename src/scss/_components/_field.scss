@@ -38,4 +38,18 @@
     right: 0;
     top: 100%;
   }
+  &__item {
+    cursor: pointer;
+    padding: 2.5px;
+    margin-bottom: 0.4em;
+    transition: 0.3s;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &:hover {
+      @media (min-width: $tablet) {
+        background-color: $border;
+      }
+    }
+  }
 }

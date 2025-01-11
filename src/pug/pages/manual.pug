@@ -1,0 +1,21 @@
+extends ../layouts/default.pug
+
+block variables
+	- const pagetitle = "Список страниц";
+
+block content
+	.manual
+		.manual__container
+			section.section
+				+breadcrumbs({path:[
+					{title:'главная', href:'/main.html'},
+					{title:'новости', href:''}
+				]})
+			section.section
+				h1 manual
+					+formField({type:'input', mode:'name required', placeholder:'Имя*'})
+					+formField({type:'select', mode:'sort', name: '', options:[
+						{value:'', option:'с 10:00 по 14:00'},
+						{value:'', option:' с 14:00 по 18:00'},
+						{value:'', option:' с 18:00 по 22:00'},
+					],default:{value:'', option:'выбрать time'}})
