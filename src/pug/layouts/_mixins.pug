@@ -1,0 +1,234 @@
+mixin breadcrumbs(param)
+	section.b-breadcrumbs
+		.content-wrapper
+			.b-breadcrumbs__wrapper
+				each item,index in param.path
+					if item.href && item.href!=''
+						//-a.b-breadcrumbs__item(href=""+item.href)!= item.title
+
+						span.b-breadcrumbs__item(itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem")
+							a(href=""+item.href itemprop="item")
+								span(itemprop="name")!= item.title
+								meta(itemprop="position" content=""+index)
+
+					else
+						//-span.b-breadcrumbs__item!= item.title
+
+						span.b-breadcrumbs__item(itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem")
+							span(itemprop="name")!= item.title
+							meta(itemprop="position" content=""+index)
+//----inputs
+
+mixin formField(param)
+	if param.type == 'input'
+		.form-field(class="b-form-field--" + param.mode)
+			.form-field__wrapper(class="" + (param.locked?'is-locked':''))
+				input.form-field__input(type="text" placeholder="" + param.placeholder value="" + (param.value?param.value:''))
+			if param.error
+				.form-field__error!= param.error
+	else if param.type == 'password'
+		.form-field(class="b-form-field--" + param.mode)
+			.form-field__wrapper
+				input.form-field__input(type="password" placeholder="" + param.placeholder value="")
+	else if param.type == 'datepicker'
+		.form-field(class="b-form-field--" + param.type)
+			.form-field__wrapper
+				input.form-field__input(type="text" class="js-datepicker" placeholder="" + param.placeholder value="" data-icon="/f/img/icon-date.svg")
+	else if param.type == 'datepicker-order'
+		.form-field(class="b-form-field--" + param.type)
+			.form-field__wrapper
+				input.form-field__input(type="text" class="js-datepicker-order" placeholder="" + param.placeholder value="" data-icon="/f/img/icon-date.svg")
+	else if param.type == 'checkbox'
+		- var attr = {};
+		if param.checked
+			- attr.checked = 'checked';
+		.form-field(class="b-form-field--" + param.mode)
+			label.form-field__label
+				input(type="checkbox")&attributes(attr)
+				.form-field__caption!= param.label
+	else if param.type == 'radio'
+		.form-field(class="b-form-field--" + param.mode)
+			each item,index in param.options
+				- var attr = {}, i = 0;
+				- i = index + 1;
+				if index==0
+					- attr['checked'] = 'checked';
+				label.form-field__label
+					input.form-field__radio(type="radio" class="" + (param.class?param.class:'') name="" + param.name value="" + i)&attributes(attr)
+					span!= item
+	else if param.type == 'suggest'
+		.form-field(class="form-field--" + param.mode).js-suggest
+			.form-field__wrapper
+				input.js-suggest-val(type="hidden" value="")
+				input.form-field__input.js-suggest-caption(type="text" placeholder="" + param.placeholder value="")
+				.form-field__button.form-field__button--clear.js-suggest-clear
+				.form-field__button.form-field__button--search.js-suggest-search
+			.form-field__suggest.js-suggest-options
+				.form-field__suggest-item.form-field__suggest-item--empty.js-suggest-item-empty Город не найден
+				each item in param.suggest
+					.form-field__suggest-item.js-suggest-item(data-val="" + item.value)!= item.option
+	else if param.type == 'select'
+		.form-field.js-select-field(class="form-field--" + param.mode)
+			input.js-select-value(type="hidden" value="" + ((param.default)?(param.default.value):0))
+			.form-field__caption.js-select-caption!= (param.default)?(param.default.option):''
+			.form-field__options.js-select-options
+				each item in param.options
+					.form-field__item.js-select-option(data-val="" + item.value)!= item.option
+	else if param.type == 'date'
+		.form-field(class="form-field--" + param.mode).js-suggest
+			.form-field__row
+				.form-field__column
+					+formField({type:'select', mode:'select', options:[
+						{value:1, option:'01'},
+						{value:2, option:'02'},
+						{value:3, option:'03'},
+						{value:4, option:'04'},
+						{value:5, option:'05'},
+						{value:6, option:'06'},
+						{value:7, option:'07'},
+						{value:8, option:'08'},
+						{value:9, option:'09'},
+						{value:10, option:'10'},
+						{value:11, option:'11'},
+						{value:12, option:'12'},
+						{value:13, option:'13'},
+						{value:14, option:'14'},
+						{value:15, option:'15'},
+						{value:16, option:'16'},
+						{value:17, option:'17'},
+						{value:18, option:'18'},
+						{value:19, option:'19'},
+						{value:20, option:'20'},
+						{value:21, option:'21'},
+						{value:22, option:'22'},
+						{value:23, option:'23'},
+						{value:24, option:'24'},
+						{value:25, option:'25'},
+						{value:26, option:'26'},
+						{value:27, option:'27'},
+						{value:28, option:'28'},
+						{value:29, option:'29'},
+						{value:30, option:'30'},
+						{value:31, option:'31'},
+					], default:{value:0, option:'День'}})
+				.form-field__column
+					+formField({type:'select', mode:'select', options:[
+						{value:1, option:'Январь'},
+						{value:2, option:'Февраль'},
+						{value:3, option:'Март'},
+						{value:4, option:'Апрель'},
+						{value:5, option:'Май'},
+						{value:6, option:'Июнь'},
+						{value:7, option:'Июль'},
+						{value:8, option:'Август'},
+						{value:9, option:'Сентябрь'},
+						{value:10, option:'Октябрь'},
+						{value:11, option:'Ноябрь'},
+						{value:12, option:'Декабрь'},
+					], default:{value:0, option:'Месяц'}})
+				.form-field__column
+					+formField({type:'select', mode:'select', options:[
+						{value:2015, option:'2015'},
+						{value:2014, option:'2014'},
+						{value:2013, option:'2013'},
+						{value:2012, option:'2012'},
+						{value:2011, option:'2011'},
+						{value:2010, option:'2010'},
+						{value:2009, option:'2009'},
+						{value:2008, option:'2008'},
+						{value:2007, option:'2007'},
+						{value:2006, option:'2006'},
+						{value:2005, option:'2005'},
+						{value:2004, option:'2004'},
+						{value:2003, option:'2003'},
+						{value:2002, option:'2002'},
+						{value:2001, option:'2001'},
+						{value:2000, option:'2000'},
+						{value:1999, option:'1999'},
+						{value:1998, option:'1998'},
+						{value:1997, option:'1997'},
+						{value:1996, option:'1996'},
+						{value:1995, option:'1995'},
+						{value:1994, option:'1994'},
+						{value:1993, option:'1993'},
+						{value:1992, option:'1992'},
+						{value:1991, option:'1991'},
+						{value:1990, option:'1990'},
+						{value:1989, option:'1989'},
+						{value:1988, option:'1988'},
+						{value:1987, option:'1987'},
+						{value:1986, option:'1986'},
+						{value:1985, option:'1985'},
+						{value:1984, option:'1984'},
+						{value:1983, option:'1983'},
+						{value:1982, option:'1982'},
+						{value:1981, option:'1981'},
+						{value:1980, option:'1980'},
+						{value:1979, option:'1979'},
+						{value:1978, option:'1978'},
+						{value:1977, option:'1977'},
+						{value:1976, option:'1976'},
+						{value:1975, option:'1975'},
+						{value:1974, option:'1974'},
+						{value:1973, option:'1973'},
+						{value:1972, option:'1972'},
+						{value:1971, option:'1971'},
+						{value:1970, option:'1970'},
+						{value:1969, option:'1969'},
+						{value:1968, option:'1968'},
+						{value:1967, option:'1967'},
+						{value:1966, option:'1966'},
+						{value:1965, option:'1965'},
+						{value:1964, option:'1964'},
+						{value:1963, option:'1963'},
+						{value:1962, option:'1962'},
+						{value:1961, option:'1961'},
+						{value:1960, option:'1960'},
+						{value:1959, option:'1959'},
+						{value:1958, option:'1958'},
+						{value:1957, option:'1957'},
+						{value:1956, option:'1956'},
+						{value:1955, option:'1955'},
+						{value:1954, option:'1954'},
+						{value:1953, option:'1953'},
+						{value:1952, option:'1952'},
+						{value:1951, option:'1951'},
+						{value:1950, option:'1950'},
+						{value:1949, option:'1949'},
+						{value:1948, option:'1948'},
+						{value:1947, option:'1947'},
+						{value:1946, option:'1946'},
+						{value:1945, option:'1945'},
+						{value:1944, option:'1944'},
+						{value:1943, option:'1943'},
+						{value:1942, option:'1942'},
+						{value:1941, option:'1941'},
+						{value:1940, option:'1940'},
+						{value:1939, option:'1939'},
+						{value:1938, option:'1938'},
+						{value:1937, option:'1937'},
+						{value:1936, option:'1936'},
+						{value:1935, option:'1935'},
+						{value:1934, option:'1934'},
+						{value:1933, option:'1933'},
+						{value:1932, option:'1932'},
+						{value:1931, option:'1931'},
+						{value:1930, option:'1930'},
+						{value:1929, option:'1929'},
+						{value:1928, option:'1928'},
+						{value:1927, option:'1927'},
+						{value:1926, option:'1926'},
+						{value:1925, option:'1925'},
+						{value:1924, option:'1924'},
+						{value:1923, option:'1923'},
+						{value:1922, option:'1922'},
+						{value:1921, option:'1921'},
+						{value:1920, option:'1920'},
+					], default:{value:0, option:'Год'}})
+	else if param.type == 'textarea'
+		.form-field(class="b-form-field--" + param.mode)
+			.form-field__wrapper
+				textarea.form-field__textarea(placeholder="" + param.placeholder)
+
+	else
+		| unknown type - #{param.type}

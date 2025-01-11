@@ -1,0 +1,41 @@
+.form-field {
+  position: relative;
+  &--sort {
+    &.is-open {
+      .form-field {
+        &__options {
+          pointer-events: all;
+          height: auto;
+          padding: 10px;
+          opacity: 1;
+          background-color: $light;
+        }
+        &__caption {
+          border-bottom: none;
+          border-radius: 5px 5px 0 0;
+        }
+      }
+    }
+  }
+  &__caption {
+    border: solid 1px $border;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  &__options {
+    transition: 0.3s;
+    padding: 0;
+    height: 0;
+    pointer-events: none;
+    opacity: 0;
+    //box-shadow: 0 0 5px rgba($border, 1);
+    border: solid 1px $border;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+  }
+}

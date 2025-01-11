@@ -1,6 +1,8 @@
+@import '_components/variables';
 @import '_components/fonts';
 @import '_components/style';
 @import '_components/reset';
+@import '_components/field';
 @import 'blocks/header';
 @import 'blocks/footer';
 
@@ -14,8 +16,11 @@
     padding: 10px;
     margin: 10px 0;
     transition: 0.3s;
+    color: $light;
     &:hover {
-      background-color: #a5a5a5;
+      @media (min-width: $tablet) {
+        background-color: #a5a5a5;
+      }
     }
   }
 }

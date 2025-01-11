@@ -5,5 +5,15 @@ block variables
 
 block content
 	.main-page
-		.main-page__container 
+		.main-page__container
+			//- +breadcrumbs({path:[
+			//- 	{title:'главная', href:'/main.html'},
+			//- 	{title:'новости', href:''}
+			//- ]})
 			h1 main
+				+formField({type:'input', mode:'name required', placeholder:'Имя*'})
+				+formField({type:'select', mode:'sort', name: '', options:[
+					{value:'', option:'с 10:00 по 14:00'},
+					{value:'', option:' с 14:00 по 18:00'},
+					{value:'', option:' с 18:00 по 22:00'},
+				]})
